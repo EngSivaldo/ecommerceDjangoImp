@@ -64,3 +64,8 @@ migrations/: Diretório para migrações do banco de dados.
 
 
 aula 4 ensina reiniciar o prjeto no outro dia
+
+ ========Estrutura para adicionar nova Pagina=============
+=> adiconar link na urls.py dentro => loja  
+=> adiconar um templates da nova pagina      
+=> adicionar uma funcao no views que carrega o template 

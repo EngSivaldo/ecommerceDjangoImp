@@ -1,0 +1,66 @@
+
+No terminal, navegue até o diretório onde você deseja criar o projeto Django:
+cd C:\Users\sival\OneDrive\Área de Trabalho\porjetoDjangoEcomm
+Criar o Ambiente Virtual:
+
+Crie o ambiente virtual:
+python -m venv .venv
+Ativar o Ambiente Virtual:
+
+Ative o ambiente virtual:
+.\.venv\Scripts\activate
+Instalar o Django:
+
+Instale o Django usando pip:
+pip install django
+Criar um Novo Projeto Django:
+
+No terminal, dentro do diretório onde você deseja criar o projeto, execute:
+django-admin startproject nome_do_projeto
+Estrutura de Pastas e Arquivos
+Após criar o projeto, a estrutura de pastas e arquivos será semelhante a esta:
+
+nome_do_projeto/
+├── manage.py
+├── nome_do_projeto/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+manage.py: Script de gerenciamento do Django.
+nome_do_projeto/: Diretório do projeto.
+init.py: Indica que este diretório deve ser tratado como um pacote Python.
+settings.py: Configurações do projeto.
+urls.py: Configurações de URLs.
+asgi.py: Configurações para ASGI.
+wsgi.py: Configurações para WSGI.
+Criando um Aplicativo Django
+Criar um Novo Aplicativo:
+Dentro do diretório do projeto, crie um novo aplicativo:
+python manage.py startapp nome_do_app
+Estrutura de Pastas e Arquivos do Aplicativo
+Após criar o aplicativo, a estrutura de pastas e arquivos será semelhante a esta:
+
+nome_do_app/
+├── __init__.py
+├── admin.py
+├── apps.py
+├── models.py
+├── tests.py
+├── views.py
+├── migrations/
+│   └── __init__.py
+init.py: Indica que este diretório deve ser tratado como um pacote Python.
+admin.py: Configurações do administrador.
+apps.py: Configurações do aplicativo.
+models.py: Definições de modelos de dados.
+tests.py: Testes do aplicativo.
+views.py: Definições de visualizações.
+migrations/: Diretório para migrações do banco de dados.
+
+
+
+
+
+aula 4 ensina reiniciar o prjeto no outro dia

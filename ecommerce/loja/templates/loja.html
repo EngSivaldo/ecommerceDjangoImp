@@ -4,5 +4,18 @@
 
 <!--puxar os arquivos do static-->
 {% block body %}
+
 <h1>Loja</h1>
+
+<ul>
+  <!-- percorrendo a lista produtos que esta no views/loja-->
+  {% for produto in produtos %}
+  <img src="{{ produto.imagem.url }}" width="300" height="450" />
+  <!-- Exibindo o nome e o preço de cada produto -->
+  <li>Produto: {{ produto.nome }} - Preço: {{ produto.preco }}</li>
+  {% endfor %}
+</ul>
+
+<!-- para exibir uma variavel {{ var }} -->
+
 {% endblock %}

@@ -94,3 +94,48 @@ from .models import *
 admin.site.register(Cliente)
 
 para imagem instalar python -m pip install Pillow
+
+
+
+
+No Django, as diferenças entre {{ }} e {% %} são importantes para entender como manipular dados e lógica nos templates:
+
+{{ }} (Double Curly Braces):
+
+Usado para exibir variáveis no template.
+Avalia a expressão dentro das chaves e exibe o resultado.
+Exemplo:
+<p>Olá, {{ nome }}!</p>
+
+Se nome for "Sivaldo", o resultado será:
+<p>Olá, Sivaldo!</p>
+
+
+{% %} (Curly Braces with Percent Signs):
+
+Usado para lógica de template, como loops e condicionais.
+Não exibe diretamente o conteúdo, mas controla o fluxo de dados.
+Exemplo de loop:
+
+<ul>
+  {% for produto in produtos %}
+  <li>{{ produto.nome }} - {{ produto.preco }}</li>
+  {% endfor %}
+</ul>
+
+Exemplo de condicional:
+
+{% if usuario.is_authenticated %}
+<p>Bem-vindo, {{ usuario.username }}!</p>
+{% else %}
+<p>Por favor, faça login.</p>
+{% endif %}
+
+
+Essas diferenças permitem que você exiba dados e controle a lógica de exibição de forma eficiente nos templates Django.
+
+
+<!-- {% for produto in produtos %}
+<p>Produto: {{ produto }}</p>
+<p>Preço: 129</p>
+{% endfor %} {% endblock %} -->

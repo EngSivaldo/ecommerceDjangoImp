@@ -1,13 +1,16 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Ecommerce Reserva{% endblock %}</title>
 
-    <!-- <link rel="stylesheet" href="/static/css/main.css" /> -->
-    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/main.css' %}?v=1.0"
+    />
 
     <!-- Bootstrap CSS -->
     <link
@@ -16,20 +19,9 @@
     />
   </head>
   <body>
-    <div class="navbar">
-      <a href="homepage.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="minhaconta.html">Minha Conta</a>
-
-      <a href="checkout.html">Checkout</a>
-      <a href="loja.html">Loja</a>
-      <a href="carrinho.html">Carrinho</a>
-    </div>
-
-    {% block body %}
-
+    <!-- puxando o arquivo navbar.html -->
+    {% include 'navbar.html' %} {% block body %}
     <h1>Base HTML</h1>
-
     {% endblock %}
 
     <!-- Bootstrap JS and dependencies -->

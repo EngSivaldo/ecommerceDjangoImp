@@ -7,7 +7,8 @@ class Cliente(models.Model):
     telefone = models.CharField(max_length=200, null=True, blank=True)
     id_sessao = models.CharField(max_length=200, null=True, blank=True)
     usuario = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-
+    
+     #faz aparecer o nome dessa categoria no banco dados
     def __str__(self):
         return self.nome
 
@@ -80,3 +81,21 @@ class ItensPedido(models.Model):
     # python manage.py migrate  
     # python manage.py runserver   
 
+#Criar um super user
+
+#python manage.py createsuperuser
+
+#sivaldo@gmail.com
+
+#Criar um super user
+
+#python manage.py createsuperuser
+
+#sivaldo@gmail.com
+#senha 123
+
+#adicionar as tabelas no admin
+#from .models import *
+
+# Register your models here.
+# admin.site.register(Cliente)

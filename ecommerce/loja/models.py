@@ -5,87 +5,90 @@ from django.contrib.auth.models import User
 
 #Tabelas========================================
 class Cliente(models.Model):
-    nome = models.CharField(max_length=100, null=True, blank=True)
-    email = models.EmailField(max_length=100, null=True, blank=True)
-    telefone = models.CharField(max_length=100, null=True, blank=True)
+    nome = models.CharField(max_length=200, null=True, blank=True)
+    email = models.EmailField(max_length=200, null=True, blank=True)
+    telefone = models.CharField(max_length=200, null=True, blank=True)
     #identifica o usuario
-    id_sessao = models.CharField(max_length=100, null=True, blank=True)
+    id_sessao = models.CharField(max_length=200, null=True, blank=True)
     #tem relacao a tabela do django
     usuario = models.OneToOneField(User, null=True, blank=True,  on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return self.nome
+    def __str__(self):
+        return self.nome
 
 
 
 
-# class Categoria(models.Model): #(Masculino, Feminino, infantil)
-#     nome = models.CharField(max_length=50)
+class Categoria(models.Model): #(Masculino, Feminino, infantil)
+    nome = models.CharField(max_length=200, null=True, blank=True)
 
-#     def __str__(self):
-#         return self.nome
+    def __str__(self):
+        return self.nome
 
-# class Tipo(models.Model): #(camisa, bermuda, calça)
-#     nome = models.CharField(max_length=50)
+class Tipo(models.Model): #(camisa, bermuda, calça)
+    nome = models.CharField(max_length=200, null=True, blank=True)
 
-#     def __str__(self):
-#         return self.nome
-
-
-
-# class Produto(models.Model):
-#     imagem = models.ImageField(upload_to='produtos/')
-#     nome = models.CharField(max_length=100)
-#     preco = models.DecimalField(max_digits=10, decimal_places=2)
-#     ativo = models.BooleanField(default=True)
-#     #associa a tabela categoria
-#     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-#       #associa a tabela tipo
-#     tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE)
-
-#     def __str__(self):
-#         return self.nome
+    def __str__(self):
+        return self.nome
 
 
 
-# class ItemEstoque(models.Model):
-#     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-#     cor = models.CharField(max_length=50)
-#     tamanho = models.CharField(max_length=5)
-#     quantidade = models.IntegerField()
+class Produto(models.Model):
+    imagem = models.CharField(max_length=400, null=True, blank=True)
+    nome = models.CharField(max_length=200, null=True, blank=True)
+    preco = models.DecimalField(max_digits=10, decimal_places=2)
+    ativo = models.BooleanField(default=True)
+    #associa a tabela categoria
+    categoria = models.ForeignKey(Categoria, null=True, blank=True, on_delete=models.SET_NULL)
+    #associa a tabela tipo
+    tipo = models.ForeignKey(Tipo, on_delete=models.SET_NULL)
 
-#     def __str__(self):
-#         return f'{self.produto.nome} - {self.cor} - {self.tamanho}'
-
-# class ItensPedido(models.Model):
-#     itemestoque = models.ForeignKey(ItemEstoque, on_delete=models.CASCADE)
-#     quantidade = models.IntegerField()
-
-#     def __str__(self):
-#         return f'{self.itemestoque.produto.nome} - {self.itemestoque.cor} - {self.itemestoque.tamanho} - {self.quantidade}'
-
-
-# class Pedido(models.Model):
-#     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-#     data_finalizacao = models.DateTimeField()
-#     finalizado = models.BooleanField(default=False)
-#     id_transacao = models.CharField(max_length=100)
-#     endereco = models.ForeignKey('Endereco', on_delete=models.CASCADE)
-#     itenspedido = models.ManyToManyField(ItensPedido)
-
-#     def __str__(self):
-#         return f'Pedido {self.id} - {self.cliente.nome}'
+    def __str__(self):
+        return self.nome
 
 
 
-# class Endereco(models.Model):
-#     rua = models.CharField(max_length=100)
-#     numero = models.CharField(max_length=10)
-#     complemento = models.CharField(max_length=100, blank=True, null=True)
-#     cep = models.CharField(max_length=10)
-#     cidade = models.CharField(max_length=50)
-#     estado = models.CharField(max_length=50)
-#     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+class ItemEstoque(models.Model):
+    produto = models.ForeignKey(Produto, null=True, blank=True, on_delete=models.SET_NULL)
+    cor = models.CharField(max_length=200, null=True, blank=True)
+    tamanho = models.CharField(max_length=200, null=True, blank=True)
+    quantidade = models.IntegerField(default=0)
 
-#     def __str__(self):
-#         return f'{self.rua}, {self.numero} - {self.cidade}/{self.estado}'
+    def __str__(self):
+        return f'{self.produto.nome} - {self.cor} - {self.tamanho}'
+
+
+class Endereco(models.Model):
+    rua = models.CharField(max_length=400,  null=True, blank=True, on_delete=models.SET_NULL)
+    numero = models.IntegerField(default=0)
+    complemento = models.CharField(max_length=100, blank=True, null=True)
+    cep = models.CharField(max_length=400,  null=True, blank=True)
+    cidade = models.CharField(max_length=400,  null=True, blank=True)
+    estado = models.CharField(max_length=400,  null=True, blank=True)
+    cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f'{self.rua}, {self.numero} - {self.cidade}/{self.estado}'
+
+
+class Pedido(models.Model):
+    cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.SET_NULL)
+    finalizado = models.BooleanField(default=False)
+    codigo_transacao = models.CharField(max_length=200, null=True, blank=True)
+    endereco = models.ForeignKey('Endereco',null=True, blank=True, on_delete=models.SET_NULL)
+    data_finalizacao = models.DateTimeField(null=True, blank=True)
+    # itenspedido = models.ManyToManyField(ItensPedido)
+
+    def __str__(self):
+        return f'Pedido {self.id} - {self.cliente.nome}'
+
+
+class ItensPedido(models.Model):
+    itemestoque = models.ForeignKey(ItemEstoque, null=True, blank=True, on_delete=models.SET_NULL)
+    quantidade = models.IntegerField(default=0)
+    pedido = models.ForeignKey(Pedido, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f'{self.itemestoque.produto.nome} - {self.itemestoque.cor} - {self.itemestoque.tamanho} - {self.quantidade}'
+
+

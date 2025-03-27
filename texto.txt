@@ -71,3 +71,9 @@ aula 4 ensina reiniciar o prjeto no outro dia
 => adicionar uma funcao no views que carrega o template 
 
 
+
+
+    #sempre que fizer alguma alteracao nas tabelas executar comandos no terminal
+    # python manage.py makemigrations
+    # python manage.py migrate  
+    # python manage.py runserver   

@@ -1,10 +1,15 @@
 from django.shortcuts import render
 #importa todas as tabelas
 from .models import *
+from .models import Banner
 
 # Create your views here.
 def homepage(request):
-  return render(request, 'homepage.html')
+    #a buscar os banners ativos no banco de dados e adicioná-los ao contexto da view homepage.
+    banners = Banner.objects.filter(ativo=True)
+    context = {'banners': banners}
+    return render(request, 'homepage.html', context)
+
 
 def loja(request):
   #codigo para exibir os dados da tabela no html

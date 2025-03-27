@@ -139,3 +139,46 @@ Essas diferenças permitem que você exiba dados e controle a lógica de exibiç
 <p>Produto: {{ produto }}</p>
 <p>Preço: 129</p>
 {% endfor %} {% endblock %} -->
+
+
+
+
+
+
+
+
+
+Para implementar a lógica dos banners na sua página inicial, você pode seguir os passos abaixo:
+
+Adicionar os banners ao contexto da view:
+Primeiro, você precisa buscar os banners ativos no banco de dados e adicioná-los ao contexto da view homepage.
+from django.shortcuts import render
+from .models import Banner
+
+def homepage(request):
+    banners = Banner.objects.filter(ativo=True)
+    context = {
+        'banners': banners,
+    }
+    return render(request, 'homepage.html', context)
+Exibir os banners no template:
+No arquivo homepage.html, você pode iterar sobre os banners e exibi-los conforme necessário.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+    <h1>Homepage</h1>
+    <div class="banners">
+        {% for banner in banners %}
+            <div class="banner">
+                <a href="{{ banner.link_destino }}">
+                    <img src="{{ banner.imagem.url }}" alt="Banner">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

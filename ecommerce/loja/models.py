@@ -73,13 +73,29 @@ class ItensPedido(models.Model):
 
     def __str__(self):
         return f'{self.itemestoque.produto.nome} - {self.itemestoque.cor} - {self.itemestoque.tamanho} - {self.quantidade}'
-    
 
 
-    #sempre que fizer alguma alteracao nas tabelas executar comandos no terminal
+#criar nova tavela-----------------
+class Banner(models.Model):
+    imagem = models.ImageField(null=True, blank=True)
+    link_destino = models.CharField(max_length=400, null=True, blank=True)
+    ativo = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.link_destino} - Ativo:{self.ativo}"
+
+#método __str__ retornará o valor do campo link_destino quando você imprimir ou visualizar uma instância do modelo Banner
+
+
+#ATENCAO=========================!!!!!!!!!!!!!!
+    #sempre que CRIAR OU fizer alguma alteracao nas tabelas executar comandos no terminal
     # python manage.py makemigrations
     # python manage.py migrate  
     # python manage.py runserver   
+
+#rEGISTRAR A URL NO ADMIN===============
+
+
 
 #Criar um super user
 

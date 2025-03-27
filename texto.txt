@@ -92,3 +92,5 @@ from .models import *
 
 # Register your models here.
 admin.site.register(Cliente)
+
+para imagem instalar python -m pip install Pillow

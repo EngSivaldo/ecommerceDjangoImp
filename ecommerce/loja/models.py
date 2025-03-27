@@ -7,7 +7,7 @@ class Cliente(models.Model):
     telefone = models.CharField(max_length=200, null=True, blank=True)
     id_sessao = models.CharField(max_length=200, null=True, blank=True)
     usuario = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-    
+
      #faz aparecer o nome dessa categoria no banco dados
     def __str__(self):
         return self.nome
@@ -25,7 +25,7 @@ class Tipo(models.Model):
         return self.nome
 
 class Produto(models.Model):
-    imagem = models.CharField(max_length=400, null=True, blank=True)
+    imagem = models.ImageField(null=True, blank=True)#camisa.png
     nome = models.CharField(max_length=200, null=True, blank=True)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     ativo = models.BooleanField(default=True)
@@ -33,7 +33,7 @@ class Produto(models.Model):
     tipo = models.ForeignKey(Tipo, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.nome
+        return f"Nome: {self.nome}, Categoria: {self.categoria}, Tipo: {self.tipo}, Preço: {self.preco} "
 
 class ItemEstoque(models.Model):
     produto = models.ForeignKey(Produto, null=True, blank=True, on_delete=models.SET_NULL)

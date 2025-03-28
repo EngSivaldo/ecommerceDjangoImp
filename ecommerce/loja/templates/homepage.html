@@ -9,7 +9,7 @@
 <div class="banners">
   {% for banner in banners %}
   <div class="banner">
-    <!--ao clicar na img direciona para link_destino-->
+    <!--ao clicar na img direciona para link_destino do banner clicado-->
     <a href="/{{ banner.link_destino }}">
       <img src="{{ banner.imagem.url }}" alt="Banner" />
     </a>

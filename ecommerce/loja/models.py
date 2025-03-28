@@ -84,6 +84,9 @@ class Banner(models.Model):
     def __str__(self):
         return f"{self.link_destino} - Ativo:{self.ativo}"
 
+
+
+
 #método __str__ retornará o valor do campo link_destino quando você imprimir ou visualizar uma instância do modelo Banner
 
 

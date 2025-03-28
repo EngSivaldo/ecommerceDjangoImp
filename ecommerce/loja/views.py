@@ -13,7 +13,8 @@ def homepage(request):
 
 def loja(request):
   #codigo para exibir os dados da tabela no html
-  produtos = Produto.objects.all()  # Consulta todos os produtos
+  produtos = Produto.objects.filter(ativo=True)  # Consulta todos os produtos
+  
   context = {"produtos": produtos}
   return render(request, 'loja.html', context)
 

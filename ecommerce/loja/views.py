@@ -10,12 +10,12 @@ def homepage(request):
     context = {'banners': banners}
     return render(request, 'homepage.html', context)
 
-
 def loja(request, nome_categoria=None):
-  #codigo para exibir os dados da tabela no html
-  produtos = Produto.objects.filter(ativo=True)  # Consulta todos os produtos
-  context = {"produtos": produtos}
-  return render(request, 'loja.html', context)
+    produtos = Produto.objects.filter(ativo=True)  # Consulta todos os produtos ativos
+    if nome_categoria:
+        produtos = produtos.filter(categoria__nome=nome_categoria)  # Filtra os produtos pela categoria
+    context = {"produtos": produtos}
+    return render(request, 'loja.html', context)
 
 
 def carrinho(request):

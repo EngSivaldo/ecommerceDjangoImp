@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 #importa todas as tabelas
 from .models import *
 from .models import Banner
+from .models import ItemEstoque
+
 
 # Create your views here.
 def homepage(request):
@@ -20,8 +23,18 @@ def loja(request, nome_categoria=None):
 #funcao para ver produto(criar ver_produto.html)
 def ver_produto(request, id_produto):
    produto = Produto.objects.get(id=id_produto)
-   context = {"produto": produto}
+   # Verifica se a quanti de itens em estoque é maior que zero (quantidade__gt=0)
+   itens_estoque = ItemEstoque.objects.filter(produto=produto, quantidade__gt=0)
+   context = {"produto": produto, "itens_estoque": itens_estoque}
    return render(request, "ver_produto.html", context)
+
+# def ver_produto(request, id_produto):
+#     produto = get_object_or_404(Produto, id=id_produto)
+#     item_estoque = ItemEstoque.objects.filter(produto=produto, quantidade__gt=0).first()
+#     context = {
+#         'item_estoque': item_estoque,
+#     }
+#     return render(request, 'ver_produto.html', context)
 
 
 def carrinho(request):

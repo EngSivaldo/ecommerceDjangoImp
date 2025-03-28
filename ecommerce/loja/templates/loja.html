@@ -10,7 +10,9 @@
 <ul>
   <!-- percorrendo a lista produtos que esta no views/loja-->
   {% for produto in produtos %}
-  <img src="{{ produto.imagem.url }}" width="300" height="450" />
+  <a href="{% url 'ver_produto' produto.id %}">
+    <img src="{{ produto.imagem.url }}" width="300" height="450" />
+  </a>
   <!-- Exibindo o nome e o preço de cada produto -->
   <li>Produto: {{ produto.nome }} - Preço: {{ produto.preco }}</li>
   {% endfor %}

@@ -22,11 +22,17 @@ def loja(request, nome_categoria=None):
 
 #funcao para ver produto(criar ver_produto.html)
 def ver_produto(request, id_produto):
-   produto = Produto.objects.get(id=id_produto)
-   # Verifica se a quanti de itens em estoque é maior que zero (quantidade__gt=0)
-   itens_estoque = ItemEstoque.objects.filter(produto=produto, quantidade__gt=0)
-   context = {"produto": produto, "itens_estoque": itens_estoque}
-   return render(request, "ver_produto.html", context)
+    produto = Produto.objects.get(id=id_produto)
+    # Verifica se a quantidade de itens em estoque é maior que zero (quantidade__gt=0)
+    itens_estoque = ItemEstoque.objects.filter(produto=produto, quantidade__gt=0)
+    if len(itens_estoque) > 0:
+        tem_estoque = True
+        cores = {item.cor for item in itens_estoque}
+    else:
+        tem_estoque = False
+        cores = {}
+    context = {"produto": produto, "itens_estoque": itens_estoque, "tem_estoque": tem_estoque, "cores": cores}
+    return render(request, "ver_produto.html", context)
 
 # def ver_produto(request, id_produto):
 #     produto = get_object_or_404(Produto, id=id_produto)

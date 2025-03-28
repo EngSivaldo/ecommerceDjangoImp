@@ -7,14 +7,30 @@
 
 <h3>{{ produto.nome }}</h3>
 
-{{ itens_estoque }}
+{% if tem_estoque %}
+<!-- verifica se o item tem estoque -->
 
 <img src="{{ produto.imagem.url }}" width="300" height="450" />
 <!-- Exibindo o nome e o preço de cada produto -->
 <li>Produto: {{ produto.nome }} - Preço: {{ produto.preco }}</li>
 
+{% for cor in cores %}
+<!-- exibir nome da cor -->
+{{ cor.nome }}
+
+<!-- exibir no da cor -->
+<i class="fa-solid fa-circle" style="color: {{ cor.codigo }};"></i>
+
+<!-- fim -->
+{% endfor %}
+
 <button>Adicionar ao Carrinho</button>
 
+{% else %}
+
+<p>Produto fora do estoque!</p>
+
+{% endif %}
 <!-- para exibir uma variavel {{ var }} -->
 
 {% endblock %}
